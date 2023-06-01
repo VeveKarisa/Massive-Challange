@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const tourSchema = new mongoose.Schema(
+const tourguideSchema = new mongoose.Schema(
   {
-    judul: {
+    nama: {
       type: String,
       required: true,
       unique: true,
@@ -19,12 +19,16 @@ const tourSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    harga: {
+    hargalokal: {
       type: Number,
       required: true,
     },
-    maksOrang: {
+    hargaturis: {
       type: Number,
+      required: true,
+    },
+    bahasa: {
+      type: String,
       required: true,
     },
     reviews: [
@@ -41,4 +45,4 @@ const tourSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Tour", tourSchema);
+export default mongoose.model("TourGuide", tourguideSchema);

@@ -1,14 +1,16 @@
-import Tour from "../models/Tour.js";
+import Destination from "../models/Destinations.js";
 
-//create new tour
-export const createTour = async (req, res) => {
-  const newTour = new Tour(req.body);
+//create new Home stay
+export const createDestination = async (req, res) => {
+  const newDestination = new Destination(req.body);
 
   try {
-    const savedTour = await newTour.save();
-    res
-      .status(200)
-      .json({ success: true, message: "Successfuly created", data: savedTour });
+    const savedDestination = await newDestination.save();
+    res.status(200).json({
+      success: true,
+      message: "Successfuly created",
+      data: savedDestination,
+    });
   } catch (err) {
     res
       .status(500)
@@ -16,11 +18,11 @@ export const createTour = async (req, res) => {
   }
 };
 
-// update tour
-export const updateTour = async (req, res) => {
+// update Home stay
+export const updateDestination = async (req, res) => {
   const id = req.params.id;
   try {
-    const updateTour = await Tour.findByIdAndUpdate(
+    const updateDestination = await Destination.findByIdAndUpdate(
       id,
       {
         $set: req.body,
@@ -30,22 +32,22 @@ export const updateTour = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Successfuly updated",
-      data: updateTour,
+      data: updateDestination,
     });
   } catch (err) {
     res.status(500).json({
       success: false,
       message: "Failed to update",
-      data: updateTour,
+      data: updateDestination,
     });
   }
 };
 
-// delete tour
-export const deleteTour = async (req, res) => {
+// delete Home stay
+export const deleteDestination = async (req, res) => {
   const id = req.params.id;
   try {
-    await Tour.findByIdAndDelete(id);
+    await Destination.findByIdAndDelete(id);
     res.status(200).json({
       success: true,
       message: "Successfuly deleted",
@@ -54,70 +56,71 @@ export const deleteTour = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to delete",
-      data: deleteTour,
+      data: deleteDestination,
     });
   }
 };
 
-// getSingle tour
-export const getSingleTour = async (req, res) => {
+// getSingle Home stay
+export const getSingleDestination = async (req, res) => {
   const id = req.params.id;
   try {
-    const tour = await Tour.findById(id);
+    const destination = await Destination.findById(id).populate("reviews");
     res.status(200).json({
       success: true,
       message: "Successful",
-      data: tour,
+      data: destination,
     });
   } catch (err) {
     res.status(404).json({
       success: false,
       message: "not found",
-      data: deleteTour,
+      data: deleteDestination,
     });
   }
 };
 
-// getAll tour
-export const getAllTour = async (req, res) => {
+// getAll Home stay
+export const getAllDestination = async (req, res) => {
   // for pagination
   const page = parseInt(req.query.page);
 
   try {
-    const tours = await Tour.find({})
+    const destinations = await Destination.find({})
+      .populate("reviews")
       .skip(page * 8)
       .limit(8);
 
     res.status(200).json({
       success: true,
-      count: tours.length,
+      count: destinations.length,
       message: "Successful",
-      data: tours,
+      data: destinations,
     });
   } catch (err) {
     res.status(404).json({
       success: false,
       message: "not found",
-      data: deleteTour,
+      data: deleteDestination,
     });
   }
 };
 
-// get tour by search
-export const getTourBySearch = async (req, res) => {
+// get Destination by search
+export const getDestinationBySearch = async (req, res) => {
   const kota = new RegExp(req.query.kota, "i");
   const maksOrang = parseInt(req.query.maksOrang);
 
   try {
     // gte = greater than equal
-    const tours = await Tour.find({
+    const destinations = await Destination.find({
       kota,
       maksOrang: { $gte: maksOrang },
-    });
+    }).populate("reviews");
     res.status(200).json({
       success: true,
       message: "Successful",
-      data: tours,
+      data: destinations,
     });
   } catch (error) {
     res.status(404).json({
@@ -127,31 +130,33 @@ export const getTourBySearch = async (req, res) => {
   }
 };
 
-// get feature tour
-export const getFeaturedTour = async (req, res) => {
+// get feature Home stay
+export const getFeaturedDestination = async (req, res) => {
   try {
-    const tours = await Tour.find({ unggulan: true }).limit(8);
+    const destinations = await Destination.find({ unggulan: true })
+      .populate("reviews")
+      .limit(8);
 
     res.status(200).json({
       success: true,
       message: "Successful",
-      data: tours,
+      data: destinations,
     });
   } catch (err) {
     res.status(404).json({
       success: false,
       message: "not found",
-      data: deleteTour,
+      data: deleteDestination,
     });
   }
 };
 
-// get tour counts
-export const getTourCount = async (req, res) => {
+// get Destination counts
+export const getDestinationCount = async (req, res) => {
   try {
-    const tourCount = await Tour.estimatedDocumentCount();
+    const destinationsCount = await Destination.estimatedDocumentCount();
 
-    res.status(200).json({ success: true, data: tourCount });
+    res.status(200).json({ success: true, data: destinationsCount });
   } catch (err) {
     res.status(500).json({ success: false, message: "failed to fetch" });
   }
