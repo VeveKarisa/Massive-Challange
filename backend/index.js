@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-
+import destinationRoute from "./routes/destinations.js";
 import homestayRoute from "./routes/homestays.js";
 import tourguideRoute from "./routes/tourguides.js";
 import userRoute from "./routes/users.js";
@@ -45,7 +45,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use("/api/v1/auth", authRoute);
-
+app.use("/api/v1/Destination", destinationRoute);
 app.use("/api/v1/HomeStay", homestayRoute);
 app.use("/api/v1/TourGuide", tourguideRoute);
 app.use("/api/v1/users", userRoute);

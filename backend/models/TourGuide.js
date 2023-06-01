@@ -23,7 +23,7 @@ const tourguideSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    hargaturis: {
+    hargainter: {
       type: Number,
       required: true,
     },

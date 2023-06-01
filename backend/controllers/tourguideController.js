@@ -1,6 +1,6 @@
 import TourGuide from "../models/TourGuide.js";
 
-//create new Home stay
+//create new Tour Guide
 export const createTourGuide = async (req, res) => {
   const newTourGuide = new TourGuide(req.body);
 
@@ -18,7 +18,7 @@ export const createTourGuide = async (req, res) => {
   }
 };
 
-// update Home stay
+// update Tour Guide
 export const updateTourGuide = async (req, res) => {
   const id = req.params.id;
   try {
@@ -43,7 +43,7 @@ export const updateTourGuide = async (req, res) => {
   }
 };
 
-// delete Home stay
+// delete Tour Guide
 export const deleteTourGuide = async (req, res) => {
   const id = req.params.id;
   try {
@@ -61,15 +61,15 @@ export const deleteTourGuide = async (req, res) => {
   }
 };
 
-// getSingle Home stay
+// getSingle Tour Guide
 export const getSingleTourGuide = async (req, res) => {
   const id = req.params.id;
   try {
-    const TourGuide = await TourGuide.findById(id).populate("reviews");
+    const tourguide = await TourGuide.findById(id).populate("reviews");
     res.status(200).json({
       success: true,
       message: "Successful",
-      data: TourGuide,
+      data: tourguide,
     });
   } catch (err) {
     res.status(404).json({
@@ -80,7 +80,7 @@ export const getSingleTourGuide = async (req, res) => {
   }
 };
 
-// getAll Home stay
+// getAll Tour Guide
 export const getAllTourGuide = async (req, res) => {
   // for pagination
   const page = parseInt(req.query.page);
@@ -109,13 +109,10 @@ export const getAllTourGuide = async (req, res) => {
 // get TourGuide by search
 export const getTourGuideBySearch = async (req, res) => {
   const kota = new RegExp(req.query.kota, "i");
-  const maksOrang = parseInt(req.query.maksOrang);
-
   try {
     // gte = greater than equal
     const tourguides = await TourGuide.find({
       kota,
-      maksOrang: { $gte: maksOrang },
     }).populate("reviews");
     res.status(200).json({
       success: true,
@@ -130,7 +127,7 @@ export const getTourGuideBySearch = async (req, res) => {
   }
 };
 
-// get feature Home stay
+// get feature Tour Guide
 export const getFeaturedTourGuide = async (req, res) => {
   try {
     const tourguides = await TourGuide.find({ unggulan: true })

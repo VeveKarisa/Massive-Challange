@@ -27,10 +27,6 @@ const destinationSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    unggulan: {
-      type: Boolean,
-      default: false,
-    },
   },
   { timestamps: true }
 );

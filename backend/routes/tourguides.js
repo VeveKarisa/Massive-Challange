@@ -14,17 +14,17 @@ import {
 
 const router = express.Router();
 
-// create new HomeStay
-router.post("/", createTourGuide);
-// update new HomeStay
+// create new Tourguide
+router.post("/", verifyAdmin, createTourGuide);
+// update new Tourguide
 router.put("/:id", verifyAdmin, updateTourGuide);
-// delete new HomeStay
+// delete new Tourguide
 router.delete("/:id", verifyAdmin, deleteTourGuide);
-// get single HomeStay
+// get single Tourguide
 router.get("/:id", getSingleTourGuide);
-// get all HomeStay
+// get all Tourguide
 router.get("/", getAllTourGuide);
-// get HomeStay by search
+// get Tourguide by search
 router.get("/search/getTourGuideBySearch", getTourGuideBySearch);
 router.get("/search/getFeaturedTourGuide", getFeaturedTourGuide);
 router.get("/search/getTourGuideCount", getTourGuideCount);
