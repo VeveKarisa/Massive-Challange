@@ -128,14 +128,5 @@
 
     "photo": "/tour-images/tour-img09.jpg",
     "featured": false
-  },
-  {
-    "judul" : "Bali, Indonesia",
-    "kota" : "Denpasar",
-    "deskripsi" :"awikwokawikwok",
-    "harga" : 100,
-    "reviews" : [],
-    "foto" : "/tour-images/tour-img01.jpg",
-    "unggulan": "true"
-}
+  }
 ]
