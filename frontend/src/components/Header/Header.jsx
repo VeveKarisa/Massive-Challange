@@ -11,11 +11,11 @@ const nav__links = [
     display: "Beranda",
   },
   {
-    path: "/about",
+    path: "/tours",
     display: "Tour Guide",
   },
   {
-    path: "/tours",
+    path: "/homestay",
     display: "Homestay",
   },
 ];

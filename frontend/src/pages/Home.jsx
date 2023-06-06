@@ -120,7 +120,7 @@ const Home = () => {
               </h2>
             </div>
 
-            <div className="counter__wraper d-flex align-items-center gap-5">
+            <div className="counter__wrapper d-flex align-items-center gap-5">
               <div className="counter__box">
                 <span>4k+</span>
                 <h6>Pengalaman</h6>
