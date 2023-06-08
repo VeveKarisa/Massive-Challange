@@ -13,6 +13,7 @@ import ServiceList from "../services/ServiceList";
 import HomestayUnggulan from "../Featured-tours/HomestayUnggulan";
 import TourUnggulan from "../Featured-tours/TourUnggulan";
 import ArtikelTerkait from "../Featured-tours/ArtikelTerkait";
+import LayananList from "../services/LayananList";
 
 const Home = () => {
   return (
@@ -78,6 +79,7 @@ const Home = () => {
                 Jadi bagian dari penyedia jasa
               </h2>
             </Col>
+            <LayananList />
           </Row>
         </Container>
       </section>

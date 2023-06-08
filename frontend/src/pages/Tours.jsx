@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import CommonSection from "../shared/CommonSection";
+import CommonSection from "../shared/CommonSectionTour";
 
 import "../styles/tour.css";
 import TourCard from "../shared/TourCard";
 import SearchBar from "../shared/SearchBar";
 import tourData from "../assets/data/tours";
 import { Container } from "reactstrap";
-import { Row } from "reactstrap";
-import { Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const Tours = () => {
   const [pageCount, setPageCount] = useState(0);
@@ -24,11 +24,30 @@ const Tours = () => {
       <section>
         <Container>
           <Row>
-            <SearchBar />
+            <h2 className="tourtitle"> Tour Guide</h2>
+            <div className="horizontal"></div>
+          </Row>
+          <Row className="top">
+            <Col xxl="7">
+              <div className="pilih">
+                <p>Pilih Tour Guide yang kamu inginkan!</p>
+              </div>
+              <SearchBar />
+            </Col>
+
+            <Col xxl="5">
+              <div className="pilih1">
+                <p>Apakah kamu mau mendaftarkan Tour Guide?</p>
+              </div>
+              <div className="daftar">
+                <Link>Daftar menjadi Tour Guide</Link>
+              </div>
+            </Col>
           </Row>
         </Container>
       </section>
-      <section>
+
+      <section className="pt-0">
         <Container>
           <Row>
             {tourData?.map((tour) => (
@@ -37,13 +56,18 @@ const Tours = () => {
               </Col>
             ))}
 
-            <Col>
-              <div className="pagination d-flex align-items-center justify-content-center mt-4 gap-3"></div>
-              {[...Array(pageCount).keys()].map((number) => (
-                <span key={number} onClick={number}>
-                  {number + 1}
-                </span>
-              ))}
+            <Col lg="12">
+              <div className="pagination d-flex align-items-center justify-content-center mt-4 gap-3">
+                {[...Array(pageCount).keys()].map((number) => (
+                  <span
+                    key={number}
+                    onClick={() => setPage(number)}
+                    className={page === number ? "active__page" : ""}
+                  >
+                    {number + 1}
+                  </span>
+                ))}
+              </div>
             </Col>
           </Row>
         </Container>
